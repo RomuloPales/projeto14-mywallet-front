@@ -12,7 +12,7 @@ export default function App() {
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/cadastro" element={<Register />} /> />
+        <Route path="/cadastro" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/nova-entrada" element={<NewEntry />} />
         <Route path="/nova-saida" element= {<NewOut />} />

@@ -62,4 +62,10 @@ export default createGlobalStyle`
     text-decoration: none;
     color: white;
   }
+  .d-flex {
+    display: flex;
+  }
+  .gap-15 {
+    gap: 15px;
+  }
 `;
