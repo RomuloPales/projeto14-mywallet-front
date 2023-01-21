@@ -47,9 +47,19 @@ export default createGlobalStyle`
     //Personal styles
     body {
         background-color: #8C11BE;
-    }
-    * {
+    
+        padding: 25px 25px 15px 25px;
         box-sizing: border-box;
         font-family: 'Raleway', sans-serif;
     }
+    form p {
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
 `;

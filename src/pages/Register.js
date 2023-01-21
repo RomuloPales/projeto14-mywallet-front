@@ -1,8 +1,11 @@
+import Logo from "../components/Logo"
+
+
 export default function Register() {
     return (
       <>
         
-        <div> bla adbla</div>
+       <Logo/>
       </>
     )
   }
