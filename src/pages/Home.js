@@ -1,74 +1,81 @@
 import Header from "../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-	faMinusCircle,
-	faPlusCircle,
-	faSignOut,
+  faMinusCircle,
+  faPlusCircle,
+  faSignOut,
 } from "@fortawesome/free-solid-svg-icons";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SquareButton from "../components/SquareButton";
 import Card from "../components/Card";
+import AuthContext from "../contexts/auth";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+ 
 
 export default function Home() {
+	const [movements, setMovements] = useState([]);
 
-    const [entries, setEntries] = useState([
-		{
-			id: 1,
-			description: "dinheiro 1",
-			value: 39.9,
-			type: "output",
-			date: "2023-01-10T00:00:00z",
-		},
-		{
-			id: 2,
-			description: "dinheiro 2",
-			value: 500.0,
-			type: "entry",
-			date: "2023-01-08T00:00:00z",
-		},
-	]);
+  const { user, setToken, setUser } = useContext(AuthContext);
 
-  const total = entries.reduce((acc, entry) => {
-    return entry.type === 'entry' ?
-      acc + entry.value :
-      acc - entry.value;
+  const navigate = useNavigate();
+
+  let total = 0;
+
+  useEffect(() => {
+    axios.get('/movements')
+      .then(({data}) => setMovements(data));
+  }, []);
+
+  total = movements.reduce((acc, movement) => {
+    return movement.type === 'entry' ?
+      acc + movement.value :
+      acc - movement.value;
   }, 0);
-  
-    return (
-      <>
-        
-        <Header>
-				<h1>Olá, Fulano</h1>
-				<FontAwesomeIcon icon={faSignOut} size="2x" onClick={null} />
+
+  const onLogout = () => {
+    setToken(null);
+    setUser(null);
+    navigate('/');
+  }
+
+	return (
+		<>
+			<Header>
+				<h1 data-test="user-name">Olá, {user.name.split(' ')[0]}</h1>
+        <button className="no-style" type="button" data-test="logout">
+  				<FontAwesomeIcon icon={faSignOut} size="2x" onClick={onLogout} />
+        </button>
 			</Header>
 
-			<Card className={entries.length <= 0 ? "empty" : false}>
-				{entries.length > 0 ? (
+			<Card className={movements.length <= 0 ? "empty" : false}>
+				{movements.length > 0 ? (
 					<>
-						<div>
-							{entries.map((entry) => {
+						<div className="list-movements">
+							{movements.map((movement, i) => {
 								return (
-									<div class="row">
+									<div className="row" key={`${movement.type}-${i}`}>
 										<p>
 											<span className="date">
-												{dayjs(entry.date).format("DD/MM")}
+												{dayjs(movement.date).format("DD/MM")}
 											</span>
-											{entry.description}
+											<span data-test="registry-name">{movement.description}</span>
 										</p>
-										<p className={`text-${entry.type}`}>
-											{entry.value.toFixed(2).replace('.', ',')}
+										<p className={`text-${movement.type}`} data-test="registry-amount">
+											{movement.value.toFixed(2).replace('.', ',')}
 										</p>
 									</div>
 								);
 							})}
 						</div>
 						<div>
-							<div class="row">
+							<div className="row">
 								<p>
                   <b>SALDO</b>
 								</p>
-								<p className={`text-${total >= 0 ? 'entry' : 'output'}`}>
+								<p className={`text-${total >= 0 ? 'entry' : 'output'}`} data-test="total-amount">
                   {total >= 0 ? total.toFixed(2).replace('.', ',') : (total * -1).toFixed(2).replace('.', ',')}
 								</p>
 							</div>
@@ -80,15 +87,15 @@ export default function Home() {
 			</Card>
 
 			<div className="d-flex gap-15">
-				<SquareButton link="/nova-entrada">
+				<SquareButton link="/nova-entrada" data-test="new-income">
 					<FontAwesomeIcon icon={faPlusCircle} size="lg" />
 					<p>Nova entrada</p>
 				</SquareButton>
-				<SquareButton link="/nova-saida">
+				<SquareButton link="/nova-saida" data-test="new-expense">
 					<FontAwesomeIcon icon={faMinusCircle} size="lg" />
 					<p>Nova saída</p>
 				</SquareButton>
 			</div>
-      </>
-    )
-  }
+		</>
+	);
+}

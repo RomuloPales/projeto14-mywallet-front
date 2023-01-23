@@ -13,5 +13,7 @@ const Headerr = styled.div`
   margin-bottom: 20px;
   > h1 {
     margin: 0;
+    font-weight: 700;
+font-size: 26px;
   }
 `;

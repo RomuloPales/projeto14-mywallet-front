@@ -68,4 +68,12 @@ export default createGlobalStyle`
   .gap-15 {
     gap: 15px;
   }
+  p.error {
+    background: #dc3545;
+    color: white;
+    font-weight: 700;
+    margin-top: -15px;
+    border-radius: 8px;
+    padding: 10px;
+  }
 `;
