@@ -1,79 +1,67 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
-    html, body, div, span, applet, object, iframe,
-    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-    a, abbr, acronym, address, big, cite, code,
-    del, dfn, em, img, ins, kbd, q, s, samp,
-    small, strike, strong, sub, sup, tt, var,
-    b, u, i, center,
-    dl, dt, dd, ol, ul, li,
-    fieldset, form, label, legend,
-    table, caption, tbody, tfoot, thead, tr, th, td,
-    article, aside, canvas, details, embed, 
-    figure, figcaption, footer, header, hgroup, 
-    menu, nav, output, ruby, section, summary,
-    time, mark, audio, video {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-    }
-   
-    article, aside, details, figcaption, figure, 
-    footer, header, hgroup, menu, nav, section {
-        display: block;
-    }
-    body {
-        line-height: 1;
-    }
-    ol, ul {
-        list-style: none;
-    }
-    blockquote, q {
-        quotes: none;
-    }
-    blockquote:before, blockquote:after,
-    q:before, q:after {
-        content: '';
-        content: none;
-    }
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-    //Personal styles
-    body {
-        background-color: #8C11BE;
-    
-        padding: 25px 25px 15px 25px;
-        box-sizing: border-box;
-        font-family: 'Raleway', sans-serif;
-    }
-    form p {
-    color: white;
-    text-align: center;
-    font-weight: 700;
-    font-size: 15px;
-  }
-  a {
-    text-decoration: none;
-    color: white;
-  }
-  .d-flex {
-    display: flex;
-  }
-  .gap-15 {
-    gap: 15px;
-  }
-  p.error {
-    background: #dc3545;
-    color: white;
-    font-weight: 700;
-    margin-top: -15px;
-    border-radius: 8px;
-    padding: 10px;
-  }
+export const GlobalStyle = createGlobalStyle`
+  html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	
+}
+body,html{
+	width: 100%;
+	height: 100vh;
+	background-color: #8C11BE;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+strong {
+  font-weight: bold;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
 `;

@@ -1,25 +1,27 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import GlobalStyle from "./globalstyle";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import NewEntry from "./pages/NewEntry";
-import NewOut from "./pages/NewOut";
-import Register from "./pages/Register";
-import { AuthProvider } from "./contexts/auth.js";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import PageNotFound from "./components/PageNotFound";
+import Signin from "./components/Signin";
+import Signup from "./components/Signup";
+import Transactions from "./components/Transaction";
+import RefreshProvider from "./Contexts/RefreshContext";
+import { GlobalStyle } from "./globalStyles";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <>
       <GlobalStyle />
-      <Routes>
-        <Route element={<AuthProvider />}>
-          <Route path="/" element={<Login />} />
-          <Route path="/cadastro" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/nova-entrada" element={<NewEntry />} />
-          <Route path="/nova-saida" element={<NewOut />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <RefreshProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/transactions/:type" element={<Transactions />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </RefreshProvider>
+    </>
   );
 }
